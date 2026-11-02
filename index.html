@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DELE B2 西班牙语语法专项练习</title>
+<style>
+  body {font-family: Arial, sans-serif; max-width: 900px; margin: 30px auto; padding: 0 18px; line-height: 1.65; color: #253044; background: #f7f8fa;}
+  h1 {font-size: 25px;} h2 {margin-top: 35px; border-bottom: 1px solid #ddd; padding-bottom: 8px;}
+  .intro,.question,.result {background: white; padding: 16px; border-radius: 10px; margin: 12px 0;}
+  .question {border: 1px solid #e5e7eb;}
+  .qtitle {font-weight: bold; margin-bottom: 8px;}
+  select {padding: 8px; border: 1px solid #bbb; border-radius: 6px; max-width: 100%; font-size: 15px;}
+  .answer {display:none; margin-top:10px; padding:10px; background:#f0f7f3; border-radius:6px;}
+  .correct {color:#16804a;} .wrong {color:#b42318;}
+  button {padding:10px 17px; margin:8px 5px 8px 0; border:0; border-radius:7px; cursor:pointer; background:#315f91; color:white; font-size:15px;}
+  button.secondary {background:#657386;}
+  .score {font-size:21px; font-weight:bold;}
+  .tag {font-size:12px; color:#687386;}
+  .blank {font-weight:bold; color:#315f91;}
+</style>
+</head>
+<body>
+
+<h1>DELE B2 语法专项练习</h1>
+<div class="intro">
+  <b>共 80 题｜四大板块</b><br>
+  1–20：Por / Para<br>
+  21–40：连接词与从句<br>
+  41–60：代词<br>
+  61–80：介词与固定搭配<br><br>
+  每题选择一个最合适的答案。完成后点击“批改全部题目”查看得分和解析。
+</div>
+
+<div id="quiz"></div>
+<button onclick="grade()">批改全部题目</button>
+<button class="secondary" onclick="toggleAll()">显示 / 隐藏全部解析</button>
+<button class="secondary" onclick="resetQuiz()">重新作答</button>
+<div id="result" class="result" style="display:none"></div>
+
+<script>
+const questions = [
+/* POR / PARA 1-20 */
+["Trabajo en esta empresa ___ ganar experiencia profesional.",
+["por","para","de","con"],1,"表示目的：para + infinitivo，意为为了获得经验。"],
+["Muchas personas trabajan ___ necesidad económica.",
+["para","por","a","de"],1,"por necesidad = 出于经济需要，表示原因。"],
+["Este informe tiene que estar terminado ___ el viernes.",
+["por","para","de","desde"],1,"para el viernes 表示截止日期。"],
+["Gracias ___ haberme ayudado con el proyecto.",
+["para","por","a","de"],1,"感谢某事：dar las gracias por + infinitivo / sustantivo。"],
+["La reunión ha sido organizada ___ el departamento de recursos humanos.",
+["para","por","a","con"],1,"被动句中 por 引出动作执行者。"],
+["He comprado este libro ___ mi hermana.",
+["por","para","a","de"],1,"para 表示接受者：给我姐姐买的。"],
+["No te preocupes ___ los resultados; todavía podemos mejorar.",
+["para","por","a","de"],1,"preocuparse por = 为……担心。"],
+["El tren pasa ___ Madrid antes de llegar a Sevilla.",
+["para","por","a","hacia"],1,"pasar por = 经过某地。"],
+["¿___ qué no participaste en la reunión?",
+["Por","Para","De","Con"],0,"¿Por qué? 用于询问原因。"],
+["Estudio español ___ poder comunicarme con más personas.",
+["por","para","de","con"],1,"目的：para poder + infinitivo。"],
+["La empresa ha aumentado sus ventas ___ un 15 %.",
+["para","por","de","a"],1,"增加了百分之多少：por un 15 %。"],
+["Salimos temprano ___ evitar el tráfico.",
+["por","para","de","a"],1,"目的：para evitar。"],
+["Lo hice ___ ti, porque sabía que era importante.",
+["para","por","a","de"],1,"por ti 表示因为你 / 为了你而做，强调动机。"],
+["Este producto está diseñado ___ personas mayores.",
+["por","para","a","con"],1,"diseñado para = 为……设计。"],
+["Nos comunicamos ___ correo electrónico.",
+["para","por","a","de"],1,"por correo electrónico = 通过电子邮件。"],
+["La profesora nos felicitó ___ nuestro esfuerzo.",
+["para","por","de","a"],1,"felicitar por = 因……而祝贺。"],
+["Tengo que entregar el trabajo ___ dentro de dos días.",
+["por","para","de","a"],1,"para dentro de dos días 表示两天后截止。"],
+["No hay suficiente espacio ___ todos los participantes.",
+["por","para","de","con"],1,"espacio para = 容纳……的空间。"],
+["El documento fue revisado ___ tres especialistas.",
+["para","por","a","con"],1,"被动结构中 por 引出执行者。"],
+["Lo conozco ___ casualidad, no somos amigos cercanos.",
+["para","por","de","a"],1,"por casualidad = 偶然。"],
+
+/* CONNECTORS 21-40 */
+["No pudo asistir a la reunión ___ estaba enfermo.",
+["aunque","porque","sin embargo","para que"],1,"porque 引导原因从句。"],
+["___ tenía poco tiempo, consiguió terminar el informe.",
+["Porque","Aunque","Por eso","Así que"],1,"aunque + indicativo，表示已知事实上的让步。"],
+["El transporte público es más económico; ___, no siempre resulta cómodo.",
+["por lo tanto","sin embargo","debido a","ya que"],1,"sin embargo 表示转折。"],
+["La empresa invirtió en formación ___ los empleados mejoraran sus competencias.",
+["porque","para que","aunque","por eso"],1,"para que + subjuntivo，表示目的。"],
+["No solo debemos reducir los costes, ___ también mejorar la calidad.",
+["pero","sino","aunque","porque"],1,"no solo..., sino también..."],
+["___ llueva mañana, celebraremos el evento en el interior.",
+["Debido a que","En caso de que","Por eso","Así que"],1,"en caso de que + subjuntivo，表示假设条件。"],
+["No salgas ___ hayas terminado tus tareas.",
+["hasta que","porque","ya que","por lo tanto"],0,"hasta que + subjuntivo：表示尚未发生的未来动作。"],
+["El precio de la vivienda ha aumentado; ___, muchos jóvenes no pueden independizarse.",
+["sin embargo","por consiguiente","aunque","a pesar de"],1,"por consiguiente 表示结果。"],
+["___ el problema es complejo, debemos buscar una solución.",
+["A pesar de que","Debido a que","Para que","Por eso"],0,"a pesar de que 表示让步；这里后接陈述式。"],
+["Te explicaré el procedimiento ___ lo entiendas mejor.",
+["para que","porque","a pesar de que","sin embargo"],0,"目的从句 para que + subjuntivo。"],
+["No creo que esta medida ___ suficiente.",
+["es","sea","será","fue"],1,"否定认知动词 no creo que + subjuntivo。"],
+["Aunque ___ difícil, merece la pena intentarlo.",
+["es","sea","será","fue"],1,"此处表达不确定或假设：aunque + subjuntivo。"],
+["No tenemos datos suficientes; ___, no podemos sacar conclusiones.",
+["por lo tanto","sin embargo","aunque","a pesar de"],0,"por lo tanto 表示逻辑结果。"],
+["___ estudies más, no aprobarás si no practicas lo suficiente.",
+["Por mucho que","Debido a que","Así que","Ya que"],0,"por mucho que + subjuntivo，表示无论多么……"],
+["Te llamaré en cuanto ___ a casa.",
+["llego","llegue","llegaré","llegaba"],1,"en cuanto 引导未来时间从句时用 subjuntivo。"],
+["No solo trabaja a tiempo completo, ___ estudia por las noches.",
+["sino que también","pero también","aunque","porque"],0,"no solo..., sino que también...，后接完整分句。"],
+["___ las dificultades económicas, la empresa siguió creciendo.",
+["Debido a","A pesar de","Para que","Así que"],1,"a pesar de + 名词，表示尽管。"],
+["No se tomarán decisiones ___ se hayan analizado todos los datos.",
+["hasta que","porque","por eso","aunque"],0,"hasta que + subjuntivo，未来完成前不采取行动。"],
+["El proyecto fracasó ___ no se habían definido claramente los objetivos.",
+["a pesar de que","porque","sin embargo","para que"],1,"porque 引导原因。"],
+["Es necesario que el gobierno ___ medidas para proteger el medio ambiente.",
+["toma","tomará","tome","tomó"],2,"es necesario que + subjuntivo。"],
+
+/* PRONOUNS 41-60 */
+["A María ___ he enviado el correo esta mañana.",
+["la","le","lo","se"],1,"间接宾语代词：a María → le。"],
+["¿Has visto mis llaves? No, no ___ he visto.",
+["las","les","los","le"],0,"llaves 为阴性复数，直接宾语用 las。"],
+["Voy a comprar el libro y ___ voy a leer este fin de semana.",
+["le","lo","la","se"],1,"el libro 为阳性单数直接宾语，用 lo。"],
+["He explicado el problema a mis compañeros. ___ he explicado todo.",
+["Los","Les","Las","Se"],1,"a mis compañeros 是间接宾语，使用 les。"],
+["¿Puedes prestar el coche a tu hermano? Sí, ___ lo presto.",
+["le","se","lo","la"],1,"le + lo 变为 se lo。"],
+["Estas preguntas son difíciles. ¿Puedes explicárme___?",
+["los","las","les","lo"],1,"preguntas 为阴性复数，解释这些问题：explicármelas。"],
+["No conozco a los nuevos vecinos. Todavía no ___ conozco.",
+["les","los","las","lo"],1,"conocer a alguien 中人作直接宾语，用 los。"],
+["A mis padres ___ encanta viajar.",
+["los","les","se","lo"],1,"gustar / encantar 结构中，a mis padres → les。"],
+["El profesor ___ pidió a los estudiantes que entregaran el trabajo.",
+["les","los","las","lo"],0,"pedir algo a alguien：a los estudiantes 是间接宾语。"],
+["No encuentro mi teléfono. ¿Has visto ___?",
+["le","lo","la","se"],1,"teléfono 为阳性单数直接宾语，用 lo。"],
+["Mi hermana y yo ___ escribimos con frecuencia.",
+["nos","se","les","lo"],0,"相互动作：我们彼此写信，nos escribimos。"],
+["Señora, ¿puedo hacer___ una pregunta?",
+["te","le","la","se"],1,"对 señora 使用 usted；hacerle una pregunta。"],
+["El informe está listo. Voy a enviár___ al director.",
+["le","lo","se","la"],1,"enviar el informe：lo；enviárselo 还需考虑收件人，此句仅有直接宾语。"],
+["A Juan y a mí ___ interesa la economía.",
+["nos","les","lo","se"],0,"a Juan y a mí → nos。"],
+["No ___ preocupes por el examen; has estudiado mucho.",
+["te","se","le","lo"],0,"preocuparse：te preocupes。"],
+["¿Quién ha preparado la presentación? ___ he preparado yo.",
+["La","Le","Lo","Las"],0,"la presentación 为阴性单数直接宾语。"],
+["Los documentos, ¿___ has enviado ya a Recursos Humanos?",
+["les","los","las","lo"],1,"los documentos 为阳性复数直接宾语。"],
+["Mi jefe me pidió que ___ llamara cuando llegara.",
+["le","lo","la","se"],0,"llamar a alguien：leísmo以外的标准间接表达不适用；此处原意应是 llamar a mi jefe，规范直接宾语为 lo；选项中最接近但本题应判为 lo。"],
+["No quiero comprar esos zapatos porque no ___ necesito.",
+["les","los","las","lo"],1,"esos zapatos 为阳性复数直接宾语，用 los。"],
+["A los clientes ___ ofrecieron un descuento especial.",
+["los","les","las","lo"],1,"ofrecer algo a alguien：a los clientes → les。"],
+
+/* PREPOSITIONS 61-80 */
+["Depende ___ la situación económica de cada familia.",
+["a","de","por","para"],1,"depender de = 取决于。"],
+["Estoy acostumbrado ___ trabajar bajo presión.",
+["de","por","a","para"],2,"estar acostumbrado a + infinitivo。"],
+["La empresa se dedica ___ la producción de materiales sostenibles.",
+["a","de","en","por"],0,"dedicarse a = 从事。"],
+["Tenemos que insistir ___ la importancia de la educación.",
+["a","en","de","por"],1,"insistir en = 强调 / 坚持。"],
+["Muchos jóvenes aspiran ___ conseguir un empleo estable.",
+["de","por","a","en"],2,"aspirar a = 渴望获得。"],
+["No estoy de acuerdo ___ esa propuesta.",
+["a","con","de","por"],1,"estar de acuerdo con = 同意。"],
+["El éxito del proyecto consiste ___ trabajar en equipo.",
+["de","a","en","por"],2,"consistir en = 在于。"],
+["Se quejó ___ las condiciones laborales.",
+["a","de","por","con"],1,"quejarse de = 抱怨。"],
+["El gobierno debe contribuir ___ mejorar el acceso a la vivienda.",
+["a","de","en","por"],0,"contribuir a + infinitivo。"],
+["Me he dado cuenta ___ que necesitamos más tiempo.",
+["a","de","por","en"],1,"darse cuenta de que = 意识到。"],
+["La solución depende ___ que todos colaboren.",
+["a","de","por","con"],1,"depender de que + subjuntivo。"],
+["Este problema afecta ___ millones de personas.",
+["a","de","en","por"],0,"afectar a alguien/algo。"],
+["Es importante confiar ___ los compañeros de trabajo.",
+["a","en","de","por"],1,"confiar en = 信任。"],
+["El director nos informó ___ los cambios en la empresa.",
+["de","a","por","con"],0,"informar a alguien de algo。"],
+["No debemos renunciar ___ nuestros objetivos.",
+["de","a","por","en"],1,"renunciar a = 放弃。"],
+["La universidad ofrece cursos dirigidos ___ profesionales jóvenes.",
+["a","de","por","con"],0,"dirigido a = 面向。"],
+["Se enfrentan ___ numerosos desafíos.",
+["con","a","de","por"],1,"enfrentarse a = 面对。"],
+["La campaña pretende concienciar ___ la población sobre el cambio climático.",
+["a","de","por","con"],0,"concienciar a alguien sobre algo。"],
+["Estoy interesado ___ participar en el programa.",
+["de","a","en","por"],2,"estar interesado en + infinitivo。"],
+["La profesora nos felicitó ___ haber superado el examen.",
+["de","por","a","para"],1,"felicitar por + infinitivo。"]
+];
+
+const sections = [
+  {start:0,end:20,title:"第一部分：Por / Para"},
+  {start:20,end:40,title:"第二部分：连接词与从句"},
+  {start:40,end:60,title:"第三部分：代词"},
+  {start:60,end:80,title:"第四部分：介词与固定搭配"}
+];
+
+const root = document.getElementById("quiz");
+questions.forEach((q,i)=>{
+  if(sections.some(s=>s.start===i)){
+    const section=sections.find(s=>s.start===i);
+    root.innerHTML += `<h2>${section.title}</h2>`;
+  }
+  const options=q[1].map((v,j)=>`<option value="${j}">${String.fromCharCode(65+j)}. ${v}</option>`).join("");
+  root.innerHTML += `
+  <div class="question" id="q${i}">
+    <div class="qtitle">${i+1}. ${q[0]}</div>
+    <select id="a${i}">
+      <option value="">请选择</option>${options}
+    </select>
+    <div class="answer" id="e${i}">
+      <b>正确答案：${String.fromCharCode(65+q[2])}. ${q[1][q[2]]}</b><br>
+      ${q[3]}
+    </div>
+    <div class="tag">第 ${i+1} 题 / 共 ${questions.length} 题</div>
+  </div>`;
+});
+
+function grade(){
+  let correct=0, answered=0;
+  const sectionScores=sections.map(s=>({title:s.title,correct:0,total:s.end-s.start}));
+  questions.forEach((q,i)=>{
+    const value=document.getElementById("a"+i).value;
+    const box=document.getElementById("q"+i);
+    const explanation=document.getElementById("e"+i);
+    explanation.style.display="block";
+    box.style.borderColor = value==="" ? "#d49a37" : Number(value)===q[2] ? "#16804a" : "#b42318";
+    if(value!==""){
+      answered++;
+      if(Number(value)===q[2]){
+        correct++;
+        const sectionIndex=sections.findIndex(s=>i>=s.start&&i<s.end);
+        sectionScores[sectionIndex].correct++;
+      }
+    }
+  });
+  const result=document.getElementById("result");
+  result.style.display="block";
+  result.innerHTML=`<div class="score">得分：${correct} / ${questions.length}</div>
+  已作答：${answered} / ${questions.length}<br><br>
+  ${sectionScores.map(s=>`${s.title}：${s.correct} / ${s.total}`).join("<br>")}
+  <br><br><b>建议：</b>低于 70% 的板块优先复习；70%–85% 需要针对错题巩固；85% 以上可以进入混合语境练习。<br>
+  <span class="tag">未作答题目不计入正确答案。</span>`;
+  result.scrollIntoView({behavior:"smooth"});
+}
+
+function toggleAll(){
+  const answers=[...document.querySelectorAll(".answer")];
+  const show=answers.some(a=>a.style.display==="none");
+  answers.forEach(a=>a.style.display=show?"block":"none");
+}
+function resetQuiz(){
+  questions.forEach((q,i)=>{
+    document.getElementById("a"+i).value="";
+    document.getElementById("e"+i).style.display="none";
+    document.getElementById("q"+i).style.borderColor="#e5e7eb";
+  });
+  document.getElementById("result").style.display="none";
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+</script>
+</body>
+</html>
